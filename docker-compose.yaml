@@ -1,0 +1,38 @@
+services:
+  customer-service:
+    build: customer-service/
+    image: localhost:5000/customer-service
+    container_name: customer-service
+    ports:
+      - "4000:8080"
+    environment:
+      - BILLING_SERVICE_URL=http://billing-service:8080
+      - DELIVERY_SERVICE_URL=http://delivery-service:8080
+    healthcheck:
+      test: curl --fail https://localhost:8080/customers || exit 1
+
+  billing-service:
+    build: billing-service/
+    image: localhost:5000/billing-service
+    ports:
+      - "4001:8080"
+    healthcheck:
+      test: curl -f https://localhost:8080/billing-addresses/0815 || exit 1
+
+  delivery-service:
+    build: delivery-service/
+    image: localhost:5000/delivery-service
+    ports:
+      - "4002:8080"
+    environment:
+      - ADDRESS_VALIDATION_SERVICE_URL=http://address-validation-service:8080
+    healthcheck:
+      test: curl -f https://localhost:8080/delivery-addresses/0815 || exit 1
+
+  address-validation-service:
+    build: address-validation-service/
+    image: localhost:5000/address-validation-service
+    ports:
+      - "4003:8080"
+    healthcheck:
+      test: curl -f https://localhost:8080/valid-addresses || exit 1
