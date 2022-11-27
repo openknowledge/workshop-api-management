@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: address-validation-service
-  description: A service that validates addresses
+  name: billing-service
+  description: A service to store and retrieve a customer's billing address
 spec:
   type: service
   lifecycle: production
-  owner: address-validation-team
+  owner: billing-team
   system: api-management-showcase
 #  providesApis:
 #    - artist-api

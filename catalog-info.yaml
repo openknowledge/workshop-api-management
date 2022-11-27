@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: customer-address-services
+spec:
+  targets:
+    - ./address-validation-service/catalog-info.yaml
+    - ./billing-service/catalog-info.yaml
+    - ./customer-service/catalog-info.yaml
+    - ./delivery-service/catalog-info.yaml
