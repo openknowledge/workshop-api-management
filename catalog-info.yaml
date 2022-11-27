@@ -12,8 +12,20 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: api-management-showcase
-  description: A small showcase in the context of API management
+  name: customer-address-system
+  description: A set of services to manage customer and all sorts of addresses
 spec:
-  owner: api-management-team
-  domain: api-management
+  owner: customer-address-team
+  domain: customer-address
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: customer-address-team
+  description: The team managing all customer/address services
+spec:
+  type: team
+  profile:
+    displayName: Customer/Address Team
+    email: customer-addresses@example.com
+    picture: https://uploads-ssl.webflow.com/62c2c4b0b44ea99f72943485/630f1f6fc0454e18056ff3f0_OPENKNOWLEDGEGmbH_UeberUns_grid4.jpeg
