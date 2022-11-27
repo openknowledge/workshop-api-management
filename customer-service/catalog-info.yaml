@@ -20,5 +20,6 @@ spec:
   type: openapi
   lifecycle: production
   owner: customer-address-team
+  system: customer-address-system
   definition:
     $text: ./src/main/resources/META-INF/openapi.yaml
