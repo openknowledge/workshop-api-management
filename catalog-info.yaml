@@ -29,3 +29,5 @@ spec:
     displayName: Customer/Address Team
     email: customer-addresses@example.com
     picture: https://uploads-ssl.webflow.com/62c2c4b0b44ea99f72943485/630f1f6fc0454e18056ff3f0_OPENKNOWLEDGEGmbH_UeberUns_grid4.jpeg
+  children: [backstage, other]
+  members: [jdoe]
