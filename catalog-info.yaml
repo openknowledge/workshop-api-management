@@ -8,3 +8,12 @@ spec:
     - ./billing-service/catalog-info.yaml
     - ./customer-service/catalog-info.yaml
     - ./delivery-service/catalog-info.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: api-management-showcase
+  description: A small showcase in the context of API management
+spec:
+  owner: api-management-team
+  domain: api-management
