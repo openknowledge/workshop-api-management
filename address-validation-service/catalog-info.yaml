@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: customer-address-services
+spec:
+#  type: url
+  targets:
+    - ./address-valiation-service
+    - ./billing-service
+    - ./customer-service
+    - ./delivery-service
