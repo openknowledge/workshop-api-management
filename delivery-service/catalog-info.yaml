@@ -6,7 +6,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: delivery-team
+  owner: api-management-team
   system: api-management-showcase
 #  providesApis:
 #    - artist-api
