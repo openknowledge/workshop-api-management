@@ -48,7 +48,7 @@ import rocks.limburg.cdimock.MockitoBeans;
 
 @MockitoBeans(types = {BillingAddressRepository.class, DeliveryAddressRepository.class})
 @MeecrowaveConfig
-public class CustomerServiceTest {
+public class CustomerServiceTestV11 {
 
     @ConfigurationInject
     private Meecrowave.Builder config;
@@ -86,9 +86,9 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readArray();
-        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("max-v1.0.json")));
-        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("erika-v1.0.json")));
-        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("james-v1.0.json")));
+        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("max-v1.1.json")));
+        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("erika-v1.1.json")));
+        assertThat(result).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("james-v1.1.json")));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readObject();
-        assertThat(result).is(sameAs(getClass().getResourceAsStream("max-with-addresses-v1.0.json")));
+        assertThat(result).is(sameAs(getClass().getResourceAsStream("max-with-addresses-v1.1.json")));
     }
 
     @Test
@@ -112,7 +112,7 @@ public class CustomerServiceTest {
                 .target(uri)
                 .path("customers")
                 .request(MediaType.APPLICATION_JSON)
-                .post(entity(getClass().getResourceAsStream("sherlock-v1.0.json"), MediaType.APPLICATION_JSON));
+                .post(entity(getClass().getResourceAsStream("sherlock-v1.1.json"), MediaType.APPLICATION_JSON));
         assertThat(response.getStatus()).isEqualTo(Response.Status.CREATED.getStatusCode());
 
         JsonObject result = Json.createReader(new StringReader(ClientBuilder
@@ -122,7 +122,7 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readObject();
-        assertThat(result).is(sameAs(getClass().getResourceAsStream("sherlock-v1.0.json")));
+        assertThat(result).is(sameAs(getClass().getResourceAsStream("sherlock-v1.1.json")));
 
         JsonArray customers = Json.createReader(new StringReader(ClientBuilder
                 .newClient()
@@ -132,7 +132,7 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readArray();
-        assertThat(customers).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("sherlock-v1.0.json")));
+        assertThat(customers).haveAtLeastOne(thatIsSameAs(getClass().getResourceAsStream("sherlock-v1.1.json")));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readObject();
-        assertThat(result).is(sameAs(getClass().getResourceAsStream("james-with-addresses-v1.0.json")));
+        assertThat(result).is(sameAs(getClass().getResourceAsStream("james-with-addresses-v1.1.json")));
     }
 
     @Test
@@ -160,7 +160,7 @@ public class CustomerServiceTest {
                 .get()
                 .readEntity(String.class)))
                 .readObject();
-        assertThat(result).is(sameAs(getClass().getResourceAsStream("erika-with-addresses-v1.0.json")));
+        assertThat(result).is(sameAs(getClass().getResourceAsStream("erika-with-addresses-v1.1.json")));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class CustomerServiceTest {
                 .target(uri)
                 .path("customers/0816/billing-address")
                 .request(MediaType.APPLICATION_JSON)
-                .put(entity(getClass().getResourceAsStream("sherlock-address-v1.0.json"), MediaType.APPLICATION_JSON));
+                .put(entity(getClass().getResourceAsStream("sherlock-address.json"), MediaType.APPLICATION_JSON));
         assertThat(response.getStatus()).isEqualTo(Response.Status.NO_CONTENT.getStatusCode());
     }
 

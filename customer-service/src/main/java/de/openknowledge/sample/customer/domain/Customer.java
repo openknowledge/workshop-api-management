@@ -17,7 +17,6 @@ package de.openknowledge.sample.customer.domain;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-import javax.json.bind.annotation.JsonbCreator;
 import javax.json.bind.annotation.JsonbProperty;
 
 import de.openknowledge.sample.address.domain.Address;
@@ -25,22 +24,42 @@ import de.openknowledge.sample.address.domain.Address;
 public class Customer {
 
     CustomerNumber number;
-    private CustomerName name;
+    private Name fullName;
     private Address billingAddress;
     private Address deliveryAddress;
 
-    @JsonbCreator
-    public Customer(@JsonbProperty("name") CustomerName name) {
-        this.name = notNull(name, "name may not be null");
+    protected Customer() {
+    	// for frameworks
     }
 
-    public Customer(CustomerNumber number, CustomerName name) {
-        this.name = notNull(name, "name may not be null");
+    public Customer(Name name) {
+        this.fullName = notNull(name, "name may not be null");
+    }
+
+    public Customer(CustomerNumber number, Name name) {
+        this.fullName = notNull(name, "name may not be null");
         this.number = notNull(number, "number may not be null");
     }
 
+    public Name getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(Name name) {
+    	this.fullName = name;
+    }
+
     public CustomerName getName() {
-        return name;
+    	return new CustomerName(fullName.getFirstName() + " " + fullName.getLastName());
+    }
+
+    public void setName(CustomerName name) {
+    	int lastIndex = name.toString().lastIndexOf(' ');
+    	if (lastIndex < 0) {
+    		this.fullName = new Name(name.toString(), name.toString());
+    	} else {
+    		this.fullName = new Name(name.toString().substring(0, lastIndex), name.toString().substring(lastIndex + 1));
+    	}
     }
 
     public CustomerNumber getNumber() {
@@ -73,7 +92,7 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return name.hashCode() ^ number.hashCode();
+        return fullName.hashCode() ^ number.hashCode();
     }
 
     @Override
@@ -88,11 +107,11 @@ public class Customer {
 
         Customer customer = (Customer) object;
 
-        return name.equals(customer.getName()) && number.equals(customer.getNumber());
+        return fullName.equals(customer.getFullName()) && number.equals(customer.getNumber());
     }
 
     @Override
     public String toString() {
-        return name + "(" + number + ")";
+        return fullName + "(" + number + ")";
     }
 }
