@@ -30,6 +30,8 @@ components:
       properties:
         number:
           type: "string"
+        name:
+          type: "string"
           deprecated: true
         fullName:
           type: "object"
@@ -49,6 +51,9 @@ components:
       properties:
         number:
           type: "string"
+        name:
+          type: "string"
+          deprecated: true
         fullName:
           type: "object"
           properties:
@@ -71,7 +76,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/Address"
@@ -92,7 +97,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/Address"
@@ -108,7 +113,7 @@ paths:
         "200":
           description: "default response"
           content:
-            application/vnd.de.openknowledge.sample.customer.v2+json:
+            application/json:
               schema:
                 type: "array"
                 items:
@@ -121,7 +126,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/vnd.de.openknowledge.sample.customer.v2+json:
+          application/json:
             schema:
               type: "object"
               $ref: "#/components/schemas/SimpleCustomer"
@@ -143,7 +148,7 @@ paths:
         "200":
           description: "default response"
           content:
-            application/vnd.de.openknowledge.sample.customer.v2+json:
+            application/json:
               schema:
                 type: "object"
                 $ref: "#/components/schemas/Customer"

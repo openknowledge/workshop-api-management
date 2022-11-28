@@ -1,0 +1,23 @@
+{
+    "fullName": {
+        "firstName": "Max",
+        "lastName": "Mustermann"
+    },
+    "number": "0815",
+    "billingAddress": {
+        "recipient": "Max Mustermann",
+        "street": {
+    		    "name": "Poststrasse",
+    		    "number": "1"
+        },
+        "city": "26122 Oldenburg"
+    },
+    "deliveryAddress": {
+        "recipient": "Max Mustermann",
+        "street": {
+    		    "name": "Poststrasse",
+    		    "number": "1"
+        },
+        "city": "26122 Oldenburg"
+    }
+}
