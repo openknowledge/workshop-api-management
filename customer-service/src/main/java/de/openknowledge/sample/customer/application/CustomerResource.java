@@ -47,8 +47,6 @@ import de.openknowledge.sample.customer.domain.CustomerRepository;
  */
 @ApplicationScoped
 @Path("/customers")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class CustomerResource {
 
     private final static Logger LOG = Logger.getLogger(CustomerResource.class.getSimpleName());
@@ -90,8 +88,12 @@ public class CustomerResource {
 
     @PUT
     @Path("/{customerNumber}/billing-address")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void setBillingAddress(@PathParam("customerNumber") CustomerNumber customerNumber, Address billingAddress) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequestBody(content = @Content(schema = @Schema(ref = "#/components/schemas/Address")))
+    @APIResponse(responseCode = "204", content = @Content(schema = @Schema(type = DEFAULT)))
+    public void setBillingAddress(
+    		@PathParam("customerNumber") @Parameter(name = "customerNumber", in = PATH, schema = @Schema(type = STRING)) CustomerNumber customerNumber,
+    		Address billingAddress) {
         LOG.info("RESTful call 'PUT billing address'");
         customerRepository.find(customerNumber).orElseThrow(customerNotFound(customerNumber));
         billingAddressRepository.update(customerNumber, billingAddress);
@@ -99,8 +101,11 @@ public class CustomerResource {
 
     @PUT
     @Path("/{customerNumber}/delivery-address")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void setDeliveryAddress(@PathParam("customerNumber") CustomerNumber customerNumber,
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequestBody(content = @Content(schema = @Schema(ref = "#/components/schemas/Address")))
+    @APIResponse(responseCode = "204", content = @Content(schema = @Schema(type = DEFAULT)))
+    public void setDeliveryAddress(
+    		@PathParam("customerNumber") @Parameter(name = "customerNumber", in = PATH, schema = @Schema(type = STRING)) CustomerNumber customerNumber,
             Address deliveryAddress) {
         LOG.info("RESTful call 'PUT delivery address'");
         customerRepository.find(customerNumber).orElseThrow(customerNotFound(customerNumber));
