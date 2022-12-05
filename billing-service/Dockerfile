@@ -12,4 +12,4 @@ EXPOSE 8080
 COPY --from=mvn /usr/src/online-shop/target/runner/meecrowave-core-runner.jar /opt/meecrowave-runner.jar
 COPY --from=mvn /usr/src/online-shop/target/billing-service.war /opt/billing-service.war
 
-ENTRYPOINT ["java", "--illegal-access=permit", "-Djava.net.preferIPv4Stack=true", "-jar", "/opt/meecrowave-runner.jar", "--webapp", "/opt/billing-service.war"]
+ENTRYPOINT ["java", "--illegal-access=permit", "-Djava.net.preferIPv4Stack=true", "-Dgeronimo.metrics.jaxrs.acceptedHosts=localhost,billing-service,prometheus", "-jar", "/opt/meecrowave-runner.jar", "--webapp", "/opt/billing-service.war"]

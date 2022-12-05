@@ -15,9 +15,10 @@
  */
 package de.openknowledge.sample.address.domain;
 
-import static javax.ws.rs.client.ClientBuilder.newClient;
+import static javax.ws.rs.client.ClientBuilder.newBuilder;
 import static javax.ws.rs.client.Entity.entity;
 import static javax.ws.rs.core.Response.Status.Family.SUCCESSFUL;
+import static org.eclipse.microprofile.opentracing.ClientTracingRegistrar.configure;
 
 import java.io.StringReader;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class DeliveryAddressRepository {
 
     public Optional<Address> find(CustomerNumber customerNumber) {
         LOG.info("load delivery address from " + deliveryServiceUrl);
-        return Optional.of(newClient()
+        return Optional.of(configure(newBuilder()).build()
                 .target(deliveryServiceUrl)
                 .path(DELIVERY_ADDRESSES_PATH)
                 .path(customerNumber.toString())
@@ -62,7 +63,7 @@ public class DeliveryAddressRepository {
 
     public void update(CustomerNumber customerNumber, Address deliveryAddress) {
         LOG.info("update delivery address at " + deliveryServiceUrl);
-        Response response = newClient()
+        Response response = configure(newBuilder()).build()
                 .target(deliveryServiceUrl)
                 .path(DELIVERY_ADDRESSES_PATH)
                 .path(customerNumber.toString())

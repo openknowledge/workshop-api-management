@@ -1,16 +1,28 @@
 services:
   customer-service:
     build: customer-service/
+    container_name: customer-service
     ports:
       - "4000:8080"
     environment:
       - BILLING_SERVICE_URL=http://billing-service:8080
       - DELIVERY_SERVICE_URL=http://delivery-service:8080
+      - GERONIMO_OPENTRACING_SPAN_CONVERTER_ZIPKIN_HTTP_COLLECTOR=http://tempo:9411
+    logging:
+      driver: "json-file"
+      options: 
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
 
   billing-service:
     build: billing-service/
     ports:
       - "4001:8080"
+    environment:
+      - GERONIMO_OPENTRACING_SPAN_CONVERTER_ZIPKIN_HTTP_COLLECTOR=http://tempo:9411
+    logging:
+      driver: "json-file"
+      options: 
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
 
   delivery-service:
     build: delivery-service/
@@ -18,8 +30,66 @@ services:
       - "4002:8080"
     environment:
       - ADDRESS_VALIDATION_SERVICE_URL=http://address-validation-service:8080
+      - GERONIMO_OPENTRACING_SPAN_CONVERTER_ZIPKIN_HTTP_COLLECTOR=http://tempo:9411
+    logging:
+      driver: "json-file"
+      options: 
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
 
   address-validation-service:
     build: address-validation-service/
     ports:
       - "4003:8080"
+    environment:
+      - GERONIMO_OPENTRACING_SPAN_CONVERTER_ZIPKIN_HTTP_COLLECTOR=http://tempo:9411
+    logging:
+      driver: "json-file"
+      options: 
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+
+  promtail:
+    image: grafana/promtail:1.4.1
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail/docker-config.yml:/etc/promtail/docker-config.yml
+    command: -config.file=/etc/promtail/docker-config.yml
+
+  loki:
+    image: grafana/loki:1.4.1
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  tempo:
+    image: grafana/tempo:r73-bf2bf6b
+    volumes:
+      - ./tempo/config.yaml:/etc/tempo.yaml
+    ports:
+      - "9411:9411"
+      - "3200:3200"
+    command: [ "-search.enabled=true", "-config.file=/etc/tempo.yaml" ]
+  
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    ports:
+      - 3300:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml
+    depends_on:
+      - customer-service
+      - billing-service
+      - delivery-service
+      - address-validation-service
+
+  promtail:
+    image: grafana/promtail:1.4.1
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - ./promtail/docker-config.yml:/etc/promtail/docker-config.yml
+    command: -config.file=/etc/promtail/docker-config.yml
+
+  grafana:
+    image: grafana/grafana:9.3.1
+    ports:
+      - "3000:3000"

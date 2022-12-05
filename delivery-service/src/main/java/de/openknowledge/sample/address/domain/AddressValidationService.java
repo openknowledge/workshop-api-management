@@ -15,8 +15,9 @@
  */
 package de.openknowledge.sample.address.domain;
 
-import static javax.ws.rs.client.ClientBuilder.newClient;
+import static javax.ws.rs.client.ClientBuilder.newBuilder;
 import static javax.ws.rs.client.Entity.entity;
+import static org.eclipse.microprofile.opentracing.ClientTracingRegistrar.configure;
 
 import java.io.StringReader;
 import java.util.logging.Logger;
@@ -43,7 +44,8 @@ public class AddressValidationService {
     String addressValidationServiceUrl;
 
     public void validate(Address address) {
-        Response validationResult = newClient()
+        Response validationResult = configure(newBuilder())
+                .build()
                 .register(JsonbJaxrsProvider.class)
                 .target(addressValidationServiceUrl)
                 .path(ADDRESS_VALIDATION_PATH)

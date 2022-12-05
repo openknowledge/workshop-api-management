@@ -39,7 +39,7 @@ import de.openknowledge.sample.address.domain.CustomerNumber;
  * RESTFul endpoint for delivery addresses
  */
 @ApplicationScoped
-@Path("/billing-addresses")
+@Path("billing-addresses")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AddressResource {
@@ -50,7 +50,7 @@ public class AddressResource {
     private AddressRepository addressesRepository;
 
     @GET
-    @Path("/{customerNumber}")
+    @Path("{customerNumber}")
     @Produces(MediaType.APPLICATION_JSON)
     public Address getAddress(@PathParam("customerNumber") CustomerNumber number) {
         LOGGER.info("RESTful call 'GET address'");
@@ -58,7 +58,7 @@ public class AddressResource {
     }
 
     @POST
-    @Path("/{customerNumber}")
+    @Path("{customerNumber}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response setAddress(@PathParam("customerNumber") CustomerNumber customerNumber, Address address,
             @Context UriInfo uri) {

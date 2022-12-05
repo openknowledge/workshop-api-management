@@ -46,7 +46,7 @@ import de.openknowledge.sample.customer.domain.CustomerRepository;
  * RESTFul endpoint for customers
  */
 @ApplicationScoped
-@Path("/customers")
+@Path("customers")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomerResource {
@@ -61,7 +61,6 @@ public class CustomerResource {
     private DeliveryAddressRepository deliveryAddressRepository;
 
     @GET
-    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> getCustomers() {
         LOG.info("RESTful call 'GET all customers'");
@@ -69,7 +68,6 @@ public class CustomerResource {
     }
 
     @POST
-    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createCustomer(Customer customer, @Context UriInfo uri) throws URISyntaxException {
         LOG.info("RESTful call 'POST new customer'");
@@ -78,7 +76,7 @@ public class CustomerResource {
     }
 
     @GET
-    @Path("/{customerNumber}")
+    @Path("{customerNumber}")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getCustomer(@PathParam("customerNumber") CustomerNumber customerNumber) {
         LOG.info("RESTful call 'GET customer'");
@@ -89,7 +87,7 @@ public class CustomerResource {
     }
 
     @PUT
-    @Path("/{customerNumber}/billing-address")
+    @Path("{customerNumber}/billing-address")
     @Produces(MediaType.APPLICATION_JSON)
     public void setBillingAddress(@PathParam("customerNumber") CustomerNumber customerNumber, Address billingAddress) {
         LOG.info("RESTful call 'PUT billing address'");
@@ -98,7 +96,7 @@ public class CustomerResource {
     }
 
     @PUT
-    @Path("/{customerNumber}/delivery-address")
+    @Path("{customerNumber}/delivery-address")
     @Produces(MediaType.APPLICATION_JSON)
     public void setDeliveryAddress(@PathParam("customerNumber") CustomerNumber customerNumber,
             Address deliveryAddress) {

@@ -15,9 +15,10 @@
  */
 package de.openknowledge.sample.address.domain;
 
-import static javax.ws.rs.client.ClientBuilder.newClient;
+import static javax.ws.rs.client.ClientBuilder.newBuilder;
 import static javax.ws.rs.client.Entity.entity;
 import static javax.ws.rs.core.Response.Status.Family.SUCCESSFUL;
+import static org.eclipse.microprofile.opentracing.ClientTracingRegistrar.configure;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -46,7 +47,7 @@ public class BillingAddressRepository {
 
     public Optional<Address> find(CustomerNumber customerNumber) {
         LOG.info("load billing address from " + billingServiceUrl);
-        return Optional.of(newClient()
+        return Optional.of(configure(newBuilder()).build()
                 .register(JsonbJaxrsProvider.class)
                 .target(billingServiceUrl)
                 .path(BILLING_ADDRESSES_PATH)
@@ -60,7 +61,8 @@ public class BillingAddressRepository {
 
     public void update(CustomerNumber customerNumber, Address billingAddress) {
         LOG.info("update billing address at " + billingServiceUrl);
-        newClient().target(billingServiceUrl)
+        configure(newBuilder()).build()
+                .target(billingServiceUrl)
                 .path(BILLING_ADDRESSES_PATH)
                 .path(customerNumber.toString())
                 .request(MediaType.APPLICATION_JSON)

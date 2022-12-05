@@ -43,7 +43,7 @@ import de.openknowledge.sample.address.domain.City;
  * RESTFul endpoint for valid addresses
  */
 @ApplicationScoped
-@Path("/valid-addresses")
+@Path("valid-addresses")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AddressResource {
@@ -61,7 +61,6 @@ public class AddressResource {
     }
     
     @POST
-    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response validateAddress(Address address, @Context UriInfo uri) throws URISyntaxException {
         LOGGER.info("RESTful call 'POST valid address'");
