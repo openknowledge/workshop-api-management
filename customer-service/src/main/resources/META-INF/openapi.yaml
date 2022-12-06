@@ -29,10 +29,8 @@ components:
       type: "object"
       properties:
         billingAddress:
-          type: "object"
           $ref: "#/components/schemas/Address"
         deliveryAddress:
-          type: "object"
           $ref: "#/components/schemas/Address"
         number:
           type: "string"
@@ -53,7 +51,6 @@ paths:
         schema:
           type: "string"
         in: "path"
-        style: "SIMPLE"
         name: "customerNumber"
       operationId: "setBillingAddress"
       description: "Creates or updates the billing address of a customers"
@@ -62,7 +59,6 @@ paths:
         content:
           application/json:
             schema:
-              type: "object"
               $ref: "#/components/schemas/Address"
       responses:
         "204":
@@ -74,7 +70,6 @@ paths:
         schema:
           type: "string"
         in: "path"
-        style: "SIMPLE"
         name: "customerNumber"
       operationId: "setDeliveryAddress"
       description: "Creates or updates the delivery address of a customers"
@@ -83,7 +78,6 @@ paths:
         content:
           application/json:
             schema:
-              type: "object"
               $ref: "#/components/schemas/Address"
       responses:
         "204":
@@ -101,7 +95,6 @@ paths:
               schema:
                 type: "array"
                 items:
-                  type: "object"
                   $ref: "#/components/schemas/Customer"
     post:
       parameters: []
@@ -112,7 +105,6 @@ paths:
         content:
           application/json:
             schema:
-              type: "object"
               $ref: "#/components/schemas/SimpleCustomer"
       responses:
         "200":
@@ -124,7 +116,6 @@ paths:
         schema:
           type: "string"
         in: "path"
-        style: "SIMPLE"
         name: "customerNumber"
       operationId: "getCustomer"
       description: "Loads the details of a customer (including addresses)"
@@ -134,5 +125,4 @@ paths:
           content:
             application/json:
               schema:
-                type: "object"
                 $ref: "#/components/schemas/Customer"

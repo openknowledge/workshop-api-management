@@ -36,3 +36,12 @@ services:
       - "4003:8080"
     healthcheck:
       test: curl -f https://localhost:8080/valid-addresses || exit 1
+      
+  backstage-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: backstage
+      POSTGRES_USER: backstage
+    ports:
+      - 54320:5432
