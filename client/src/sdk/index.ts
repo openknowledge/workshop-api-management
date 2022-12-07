@@ -35,7 +35,7 @@ export interface Address {
   city: string;
 }
 
-export const CustomerApi = {
+export const CustomerSdk = {
   async getAllCustomer(): Promise<CustomerWrapper[]> {
     const response = await fetch("http://localhost:4000/customers");
 

@@ -1,8 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { readFileSync } from "fs";
-import { SimpleCustomer } from "../codegen/index.js";
-import { Customer, CustomerApi, CustomerWrapper } from "../sdk/index.js";
+import { CustomerSdk, CustomerWrapper } from "../sdk/index.js";
 
 const resolvers = {
   Customer: {
@@ -17,13 +16,13 @@ const resolvers = {
 
   Query: {
     customers: async () => {
-      const customerWrappers = CustomerApi.getAllCustomer();
+      const customerWrappers = CustomerSdk.getAllCustomer();
 
       return customerWrappers;
     },
 
     customer: async (_: unknown, args: { number: string }) => {
-      return CustomerApi.getCustomer(args.number);
+      return CustomerSdk.getCustomer(args.number);
     },
   },
 };
