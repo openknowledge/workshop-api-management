@@ -1,0 +1,146 @@
+components:
+  schemas:
+    de_openknowledge_sample_address_domain_CustomerNumber:
+      type: "object"
+      properties: {}
+    de_openknowledge_sample_address_domain_Address:
+      type: "object"
+      properties:
+        city:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_City"
+        street:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_Street"
+        recipient:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_Recipient"
+    de_openknowledge_sample_address_domain_Recipient:
+      type: "object"
+      properties: {}
+    de_openknowledge_sample_address_domain_Street:
+      type: "object"
+      properties:
+        number:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_HouseNumber"
+        name:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_StreetName"
+    de_openknowledge_sample_address_domain_HouseNumber:
+      type: "object"
+      properties: {}
+    de_openknowledge_sample_address_domain_StreetName:
+      type: "object"
+      properties: {}
+    de_openknowledge_sample_address_domain_City:
+      type: "object"
+      properties:
+        zipCode:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_ZipCode"
+        cityName:
+          type: "object"
+          $ref: "#/components/schemas/de_openknowledge_sample_address_domain_CityName"
+    de_openknowledge_sample_address_domain_ZipCode:
+      type: "object"
+      properties:
+        german:
+          type: "boolean"
+    de_openknowledge_sample_address_domain_CityName:
+      type: "object"
+      properties: {}
+openapi: "3.0.1"
+paths:
+  /billing-addresses/{customerNumber}:
+    get:
+      parameters:
+        - schema:
+            type: "object"
+            $ref: "#/components/schemas/de_openknowledge_sample_address_domain_CustomerNumber"
+          required: true
+          in: "path"
+          style: "simple"
+          name: "customerNumber"
+      operationId: "getAddress"
+      responses:
+        "200":
+          description: "default response"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                $ref: "#/components/schemas/de_openknowledge_sample_address_domain_Address"
+        default:
+          description: "default response"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                $ref: "#/components/schemas/de_openknowledge_sample_address_domain_Address"
+    post:
+      parameters:
+        - schema:
+            type: "object"
+            $ref: "#/components/schemas/de_openknowledge_sample_address_domain_CustomerNumber"
+          required: true
+          in: "path"
+          style: "simple"
+          name: "customerNumber"
+      operationId: "setAddress"
+      responses:
+        "200":
+          description: "default response"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                nullable: true
+                properties: {}
+        default:
+          description: "default response"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                nullable: true
+                properties: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              $ref: "#/components/schemas/de_openknowledge_sample_address_domain_Address"
+  '/{path: webjars/.*}':
+    get:
+      parameters:
+        - schema:
+            type: "string"
+          required: true
+          in: "path"
+          style: "simple"
+          name: "path"
+      operationId: "staticJsResources"
+      responses:
+        "200":
+          description: "default response"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+                nullable: true
+                properties: {}
+        default:
+          description: "default response"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+                nullable: true
+                properties: {}
+  /openapi-ui/logo.png: {}
+  /openapi-ui/favicon-{size}.png: {}
+  /openapi-ui: {}
+  /openapi-ui/style.css: {}
+  /openapi-ui/index.html: {}
