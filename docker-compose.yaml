@@ -23,3 +23,12 @@ services:
     build: address-validation-service/
     ports:
       - "4003:8080"
+
+  backstage-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: backstage
+      POSTGRES_USER: backstage
+    ports:
+      - 54320:5432

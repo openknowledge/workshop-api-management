@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: delivery-service
+  title: Delivery Service
+  description: A service to store and retrieve a customer's delivery address
+spec:
+  type: service
+  lifecycle: production
+  owner: customer-address-team
+  system: customer-address-system

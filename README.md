@@ -15,13 +15,36 @@ docker compose up --build
 
 from within the folder you cloned the repository.
 
-# Demos
+# Demo
 
-You find the demos in the corresponding branches
+This demo showcases the Backstage developer portal framework.
 
-* [Demo Client](https://github.com/openknowledge/workshop-api-management/tree/client)
-* [Demo Backstage](https://github.com/openknowledge/workshop-api-management/tree/backstage)
-* [Demo Monitoring](https://github.com/openknowledge/workshop-api-/tree/monitoring)
-* [Demo Versioning V1.0](https://github.com/openknowledge/workshop-api-management/tree/versioning-v1.0)
-* [Demo Versioning V1.1](https://github.com/openknowledge/workshop-api-management/tree/versioning-v1.1)
-* [Demo Versioning V2.0](https://github.com/openknowledge/workshop-api-management/tree/versioning-v2.0)
+Go to the directory `./backstage`.
+
+Copy `app-config.local-example.yaml` to `app-config.local.yaml`.
+
+Create a GitHub Personal Access Token here https://github.com/settings/tokens/new using the full repo scope.
+
+Edit `app-config.local.yaml` and replace `${GITHUB_TOKEN}` with your generated token.
+
+Run `yarn install` to install all Backstage depenencies (you may have to install [yarn](https://yarnpkg.com/) first).
+
+To start Backstage run `yarn dev`.
+
+The Backstage frontend should be opened in your browser. You may also open http://localhost:3000 manually.
+
+Go to http://localhost:3000/create and click on the "Register Existing Component" button.
+
+As "Repository URL" enter `https://github.com/openknowledge/workshop-api-management/blob/backstage/catalog-info.yaml`
+
+Click the "Analyze" button. A series of entities should be shown.
+
+After clicking on the "Import" button the entities should be added.
+
+Go to "Home" and take a look at the imported entities.
+
+Try to jump from entity to entity to get a feel how Backstage works.
+
+Feel free to fork the Git repository and make a few changes.
+
+Push your changes to your own repository and try to
