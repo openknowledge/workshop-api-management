@@ -4,7 +4,9 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "codegen": "openapi-generator-cli generate -g typescript-fetch -i openapi.yaml -o src/codegen"
+    "codegen": "openapi-generator-cli generate -g typescript-fetch -i openapi.yaml -o src/codegen",
+    "watch": "tsc -w",
+    "start": "node lib/index.js"
   },
   "author": "",
   "license": "ISC",
