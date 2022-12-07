@@ -53,7 +53,7 @@ public class BillingAddressRepository {
 
     public Optional<Address> find(CustomerNumber customerNumber) {
         LOG.info("load billing address from " + billingServiceUrl);
-        return Optional.of(client
+        return Optional.of(ClientBuilder.newClient()
                 .register(JsonbJaxrsProvider.class)
                 .target(billingServiceUrl)
                 .path(BILLING_ADDRESSES_PATH)

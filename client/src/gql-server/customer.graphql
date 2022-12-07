@@ -1,0 +1,24 @@
+type Customer {
+  number: String!
+  name: String!
+
+  billingAddress: Address
+  deliveryAddress: Address
+}
+
+type Address {
+  recipient: String!
+  city: String!
+  street: Street!
+}
+
+type Street {
+  name: String!
+  number: String!
+}
+
+type Query {
+  customers: [Customer!]!
+
+  customer(number: String!): Customer
+}

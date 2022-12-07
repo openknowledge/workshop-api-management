@@ -56,7 +56,8 @@ public class DeliveryAddressRepository {
 
     public Optional<Address> find(CustomerNumber customerNumber) {
         LOG.info("load delivery address from " + deliveryServiceUrl);
-        return Optional.of(client
+
+        return Optional.of(ClientBuilder.newClient()
                 .target(deliveryServiceUrl)
                 .path(DELIVERY_ADDRESSES_PATH)
                 .path(customerNumber.toString())
