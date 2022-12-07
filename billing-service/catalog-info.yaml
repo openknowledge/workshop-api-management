@@ -1,27 +1,27 @@
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: billing-address-api
-  title: Billing Address API
-  description: The HTTP API of the Billing Service
-spec:
-  type: openapi
-  lifecycle: production
-  owner: customer-address-team
-  system: customer-address-system
-  definition:
-    $text: ./src/main/resources/META-INF/openapi.yaml
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: billing-service
-  title: Billing Service
-  description: A service to store and retrieve a customer's billing address
-spec:
-  type: service
-  lifecycle: production
-  owner: customer-address-team
-  system: customer-address-system
-  providesApis:
-  - customer-api
+# apiVersion: backstage.io/v1alpha1
+# kind: API
+# metadata:
+#   name: billing-address-api
+#   title: Billing Address API
+#   description: The HTTP API of the Billing Service
+# spec:
+#   type: openapi
+#   lifecycle: production
+#   owner: customer-address-team
+#   system: customer-address-system
+#   definition:
+#     $text: ./src/main/resources/META-INF/openapi.yaml
+# ---
+# apiVersion: backstage.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: billing-service
+#   title: Billing Service
+#   description: A service to store and retrieve a customer's billing address
+# spec:
+#   type: service
+#   lifecycle: production
+#   owner: customer-address-team
+#   system: customer-address-system
+#   providesApis:
+#   - customer-api
