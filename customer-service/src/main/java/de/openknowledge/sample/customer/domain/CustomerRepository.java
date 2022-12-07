@@ -28,6 +28,9 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Gauge;
+
 /**
  * Addresses repository
  */
@@ -52,6 +55,11 @@ public class CustomerRepository {
         LOGGER.info(format("customer repository initialized with %d customers: ", customers.size()));
     }
 
+    @Counted(name = "ordersPerHour")
+    public int getOrdersPerHour() {
+    	return 42;
+    }
+    
     public List<Customer> findAll() {
         return customers.values().stream().map(Customer::clearAddresses).collect(toList());
     }
