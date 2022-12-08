@@ -4,7 +4,7 @@ metadata:
   name: billing-address-api
   title: Billing Address API
   description: The HTTP API of the Billing Service
-spec:
+spec: 
   type: openapi
   lifecycle: production
   owner: customer-address-team
