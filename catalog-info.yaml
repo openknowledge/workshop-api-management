@@ -5,9 +5,9 @@ metadata:
 spec:
   targets:
     - ./customer-service/catalog-info.yaml
-    # - ./address-validation-service/catalog-info.yaml
+    - ./address-validation-service/catalog-info.yaml
     - ./billing-service/catalog-info.yaml
-    # - ./delivery-service/catalog-info.yaml
+    - ./delivery-service/catalog-info.yaml
 # ---
 # apiVersion: backstage.io/v1alpha1
 # kind: System
