@@ -2,6 +2,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
   name: customer-address-services
+
+# sdfj
 spec:
   targets:
     - ./customer-service/catalog-info.yaml
